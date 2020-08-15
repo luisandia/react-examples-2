@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CardList from "./components/CardList";
 import "./App.css";
+import SearchBox from "./components/SearchBox/SearchBox";
 interface Props {}
 
 export interface Monster {
@@ -33,10 +34,8 @@ class App extends Component<Props, State> {
     );
     return (
       <div className="App">
-        <input
-          type="search"
-          placeholder="search monsters"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        <SearchBox
+          handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             this.setState({ searchField: e.target.value })
           }
         />
