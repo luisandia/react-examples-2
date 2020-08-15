@@ -10,11 +10,13 @@ export interface Monster {
 }
 interface State {
   monsters: Monster[];
+  searchField: string;
 }
 
 class App extends Component<Props, State> {
   state = {
     monsters: [] as Monster[],
+    searchField: "",
   };
 
   async componentDidMount() {
@@ -25,9 +27,20 @@ class App extends Component<Props, State> {
   }
 
   render() {
+    const { monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter((monster) =>
+      monster.name.toLowerCase().includes(searchField.toLowerCase())
+    );
     return (
       <div className="App">
-        <CardList monsters={this.state.monsters} />
+        <input
+          type="search"
+          placeholder="search monsters"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            this.setState({ searchField: e.target.value })
+          }
+        />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
