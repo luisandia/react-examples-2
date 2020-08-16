@@ -27,6 +27,10 @@ class App extends Component<Props, State> {
     this.setState({ monsters });
   }
 
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ searchField: e.target.value });
+  };
+
   render() {
     const { monsters, searchField } = this.state;
     const filteredMonsters = monsters.filter((monster) =>
@@ -34,11 +38,8 @@ class App extends Component<Props, State> {
     );
     return (
       <div className="App">
-        <SearchBox
-          handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            this.setState({ searchField: e.target.value })
-          }
-        />
+        <h1>Monsters Search</h1>
+        <SearchBox handleChange={this.handleChange} />
         <CardList monsters={filteredMonsters} />
       </div>
     );
