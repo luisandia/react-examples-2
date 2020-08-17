@@ -1,11 +1,5 @@
 import React from "react";
-
-interface Item {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-}
+import { Item, CollectionItem } from "../CollectionItem/CollectionItem";
 
 interface Props {
   title: string;
@@ -16,10 +10,12 @@ export const PreviewCollection: React.FC<Props> = ({ title, items }) => {
   return (
     <div className="collection-preview">
       <h1 className="title">{title}</h1>
-      <div className="previdw">
-        {items.map((item) => (
-          <div key={item.id}>{item.name}</div>
-        ))}
+      <div className="preview">
+        {items
+          .filter((item, idx) => idx < 4)
+          .map((item) => (
+            <CollectionItem key={item.id} item={item} />
+          ))}
       </div>
     </div>
   );

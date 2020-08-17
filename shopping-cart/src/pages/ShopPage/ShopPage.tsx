@@ -4,7 +4,7 @@ import { PreviewCollection } from "../../components/PreviewCollection/PreviewCol
 import "./collection-preview.styles.scss";
 interface Props {}
 
-function ShopPage({}: Props): ReactElement {
+const ShopPage: React.FC<Props> = (props): ReactElement => {
   return (
     <div className="shop-page">
       {SHOP_DATA.map((shop) => (
@@ -16,6 +16,6 @@ function ShopPage({}: Props): ReactElement {
       ))}
     </div>
   );
-}
+};
 
 export default ShopPage;
