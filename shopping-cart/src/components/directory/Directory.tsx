@@ -7,8 +7,8 @@ interface Props {}
 const Directory: React.FC<Props> = (props) => {
   return (
     <div className="directory-menu">
-      {sections.map(({ title, imageUrl, id }) => (
-        <MenuItem key={id} title={title} imageUrl={imageUrl} />
+      {sections.map(({ id, ...otherSectionProps }) => (
+        <MenuItem key={id} {...otherSectionProps} />
       ))}
     </div>
   );
