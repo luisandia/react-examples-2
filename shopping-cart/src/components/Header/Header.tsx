@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import "./header.styles.scss";
+import { auth } from "../../firebase/firebase.utils";
 
-interface Props {}
+interface Props {
+  user: firebase.User | null;
+}
 
-export const Header: React.FC<Props> = (props) => {
+export const Header: React.FC<Props> = ({ user }) => {
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -20,6 +23,15 @@ export const Header: React.FC<Props> = (props) => {
         <Link className="option" to="shop">
           CONTACT
         </Link>
+        {user ? (
+          <div className="option" onClick={() => auth.signOut()}>
+            SIGN OUT
+          </div>
+        ) : (
+          <Link className="option" to="/signin">
+            SIGN IN
+          </Link>
+        )}
       </div>
     </div>
   );

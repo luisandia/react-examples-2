@@ -7,11 +7,19 @@ interface Props
     HTMLButtonElement
   > {
   children: React.ReactNode;
+  isGoogleSignIn?: boolean;
 }
 
-export const CustomButtom: React.FC<Props> = ({ children, ...otherProps }) => {
+export const CustomButtom: React.FC<Props> = ({
+  children,
+  isGoogleSignIn,
+  ...otherProps
+}) => {
   return (
-    <button className="custom-button" {...otherProps}>
+    <button
+      className={`${isGoogleSignIn ? "google-sign-in" : ""} custom-button`}
+      {...otherProps}
+    >
       {children}
     </button>
   );

@@ -1,5 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+create .env.development.local document with follow information:
+
+
+REACT_APP_apiKey=your_firebase_value
+REACT_APP_authDomain=your_firebase_value
+REACT_APP_databaseURL=your_firebase_value
+REACT_APP_projectId=your_firebase_value
+REACT_APP_storageBucket=your_firebase_value
+REACT_APP_messagingSenderId=your_firebase_value
+REACT_APP_appId=your_firebase_value
+REACT_APP_measurementId=your_firebase_value
+
 ## Available Scripts
 
 In the project directory, you can run:

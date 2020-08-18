@@ -47,9 +47,13 @@ export const SignIn = (props: Props) => {
           label="password"
           required
         />
-        <CustomButton type="submit"> Sign in </CustomButton>
+        <div className="buttons">
+          <CustomButton type="submit"> Sign in </CustomButton>
+          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            Sign with google
+          </CustomButton>
+        </div>
       </form>
-      <CustomButton onClick={signInWithGoogle}> Sign with google </CustomButton>
     </div>
   );
 };

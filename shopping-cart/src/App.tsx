@@ -12,12 +12,10 @@ function App() {
   if (initializing) {
     return <div>Loading</div>;
   }
-  console.log(user);
-  console.log(process.env);
 
   return (
     <div>
-      <Header />
+      <Header user={user} />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
