@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormInput from "../FormInput";
 import CustomButton from "../CustomButtom";
+import { signInWithGoogle } from "../../firebase/firebase.utils";
 
 import "./sign-in.styles.scss";
 
@@ -48,6 +49,7 @@ export const SignIn = (props: Props) => {
         />
         <CustomButton type="submit"> Sign in </CustomButton>
       </form>
+      <CustomButton onClick={signInWithGoogle}> Sign with google </CustomButton>
     </div>
   );
 };

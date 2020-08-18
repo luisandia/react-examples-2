@@ -1,12 +1,20 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
+import Header from "./components/Header";
+import { useAuth } from "./components/SignIn/useAuth";
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
-import Header from "./components/Header";
 import SignInAndSignUpPage from "./pages/SignInAndSignUpPage";
 
 function App() {
+  const { initializing, user } = useAuth();
+  if (initializing) {
+    return <div>Loading</div>;
+  }
+  console.log(user);
+  console.log(process.env);
+
   return (
     <div>
       <Header />
