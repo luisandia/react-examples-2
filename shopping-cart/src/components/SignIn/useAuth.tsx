@@ -5,11 +5,20 @@ import {
   User,
 } from '../../firebase/firebase.utils'
 
+interface userProps {
+  createdAt: { nanoseconds: number; seconds: number }
+  displayName: string
+  email: string
+}
+
+interface currentUser {
+  currentUser: (userProps & { id: string }) | null
+}
 export const useAuth = () => {
-  const [state, setState] = React.useState(() => {
-    const user: User = auth.currentUser
-    return { initializing: !user, user }
+  const [state, setState] = React.useState<currentUser>({
+    currentUser: null,
   })
+
   const onChange = React.useCallback(
     async (user: User) => {
       if (user) {
@@ -17,15 +26,18 @@ export const useAuth = () => {
         userRef?.onSnapshot((snapshop) => {
           setState({
             ...state,
-            initializing: false,
-            user: { uid: snapshop.id, ...snapshop.data() },
+            currentUser: {
+              id: snapshop.id,
+              ...(snapshop.data() as userProps),
+            },
           })
         })
       } else {
-        setState({ ...state, user })
+        setState({ ...state, currentUser: user })
       }
     },
-    [state],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
   )
 
   React.useEffect(() => {

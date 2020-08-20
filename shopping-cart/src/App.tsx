@@ -9,14 +9,12 @@ import SignInAndSignUpPage from './pages/SignInAndSignUpPage'
 import { createUserProfileDocument } from './firebase/firebase.utils'
 
 function App() {
-  const { initializing, user } = useAuth()
-  if (initializing) {
-    return <div>Loading</div>
-  }
-  createUserProfileDocument(user, '')
+  const { currentUser } = useAuth()
+
+  createUserProfileDocument(currentUser, '')
   return (
     <div>
-      <Header user={user} />
+      <Header user={currentUser} />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
