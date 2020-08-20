@@ -19,7 +19,6 @@ export const SignIn = (props: Props) => {
     const { email, password } = state
     try {
       const user = await auth.signInWithEmailAndPassword(email, password)
-      console.log(user)
     } catch (error) {
       console.error(error)
     }
@@ -56,7 +55,7 @@ export const SignIn = (props: Props) => {
         />
         <div className="buttons">
           <CustomButton type="submit"> Sign in </CustomButton>
-          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+          <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn>
             Sign with google
           </CustomButton>
         </div>

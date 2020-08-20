@@ -11,7 +11,7 @@ interface userProps {
   email: string
 }
 
-interface currentUser {
+export interface currentUser {
   currentUser: (userProps & { id: string }) | null
 }
 export const useAuth = () => {
