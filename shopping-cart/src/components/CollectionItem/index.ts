@@ -1,2 +1,2 @@
-import { CollectionItem } from "./CollectionItem";
-export default CollectionItem;
+import { CollectionItem } from './CollectionItem'
+export default CollectionItem

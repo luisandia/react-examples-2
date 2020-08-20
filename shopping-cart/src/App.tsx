@@ -1,18 +1,19 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import "./App.css";
-import Header from "./components/Header";
-import { useAuth } from "./components/SignIn/useAuth";
-import HomePage from "./pages/HomePage";
-import ShopPage from "./pages/ShopPage";
-import SignInAndSignUpPage from "./pages/SignInAndSignUpPage";
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import './App.css'
+import Header from './components/Header'
+import { useAuth } from './components/SignIn/useAuth'
+import HomePage from './pages/HomePage'
+import ShopPage from './pages/ShopPage'
+import SignInAndSignUpPage from './pages/SignInAndSignUpPage'
+import { createUserProfileDocument } from './firebase/firebase.utils'
 
 function App() {
-  const { initializing, user } = useAuth();
+  const { initializing, user } = useAuth()
   if (initializing) {
-    return <div>Loading</div>;
+    return <div>Loading</div>
   }
-
+  createUserProfileDocument(user, '')
   return (
     <div>
       <Header user={user} />
@@ -22,7 +23,7 @@ function App() {
         <Route path="/signin" component={SignInAndSignUpPage} />
       </Switch>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

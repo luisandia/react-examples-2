@@ -1,15 +1,15 @@
-import React from "react";
-import "./collection-item.styles.scss";
+import React from 'react'
+import './collection-item.styles.scss'
 
 export interface Item {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
+  id: number
+  name: string
+  imageUrl: string
+  price: number
 }
 
 interface Props {
-  item: Item;
+  item: Item
 }
 
 export const CollectionItem: React.FC<Props> = ({
@@ -28,5 +28,5 @@ export const CollectionItem: React.FC<Props> = ({
         <span className="price">{price}</span>
       </div>
     </div>
-  );
-};
+  )
+}

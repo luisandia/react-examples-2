@@ -1,15 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/crown.svg";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { ReactComponent as Logo } from '../../assets/crown.svg'
 
-import "./header.styles.scss";
-import { auth } from "../../firebase/firebase.utils";
+import './header.styles.scss'
+import { auth, User } from '../../firebase/firebase.utils'
 
 interface Props {
-  user: firebase.User | null;
+  user: User
 }
 
-export const Header: React.FC<Props> = ({ user }) => {
+const Header: React.FC<Props> = ({ user }) => {
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -34,5 +34,7 @@ export const Header: React.FC<Props> = ({ user }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
+
+export default Header
