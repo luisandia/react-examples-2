@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import FormInput from "../FormInput";
-import CustomButton from "../CustomButtom";
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import React, { useState } from 'react'
+import FormInput from '../FormInput'
+import CustomButton from '../CustomButtom'
+import { signInWithGoogle } from '../../firebase/firebase.utils'
 
-import "./sign-in.styles.scss";
+import './sign-in.styles.scss'
 
 interface Props {}
 
 export const SignIn = (props: Props) => {
   const [state, setState] = useState({
-    email: "",
-    password: "",
-  });
+    email: '',
+    password: '',
+  })
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    setState({ ...state, email: "", password: "" });
-  };
+    setState({ ...state, email: '', password: '' })
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
+    const { value, name } = event.target
 
-    setState({ ...state, [name]: value });
-  };
+    setState({ ...state, [name]: value })
+  }
 
   return (
     <div className="sign-in">
@@ -34,7 +34,7 @@ export const SignIn = (props: Props) => {
         <FormInput
           name="email"
           type="email"
-          handleChange={handleChange}
+          onChange={handleChange}
           value={state.email}
           label="email"
           required
@@ -43,7 +43,7 @@ export const SignIn = (props: Props) => {
           name="password"
           type="password"
           value={state.password}
-          handleChange={handleChange}
+          onChange={handleChange}
           label="password"
           required
         />
@@ -55,5 +55,5 @@ export const SignIn = (props: Props) => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}

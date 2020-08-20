@@ -15,7 +15,11 @@ export const useAuth = () => {
       if (user) {
         const userRef = await createUserProfileDocument(user)
         userRef?.onSnapshot((snapshop) => {
-          setState({ ...state, user: { uid: snapshop.id, ...snapshop.data() } })
+          setState({
+            ...state,
+            initializing: false,
+            user: { uid: snapshop.id, ...snapshop.data() },
+          })
         })
       } else {
         setState({ ...state, user })
