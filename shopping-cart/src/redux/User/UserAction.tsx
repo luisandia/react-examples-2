@@ -5,5 +5,5 @@ export const setCurrentUser = (
   currentUser: currentUser,
 ): setCurrentUserAction => ({
   type: SET_CURRENT_USER,
-  payload: { currentUser },
+  payload: currentUser,
 })

@@ -1,15 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
-
+import { auth } from '../../firebase/firebase.utils'
+import { RootState } from '../../redux/RootReducer'
 import './header.styles.scss'
-import { auth, User } from '../../firebase/firebase.utils'
 
-interface Props {
-  user: User
-}
+interface Props {}
 
-const Header: React.FC<Props> = ({ user }) => {
+const Header: React.FC<Props> = () => {
+  const user = useSelector<RootState>((state) => state.user.currentUser)
+  console.log('my yuser ', user)
   return (
     <div className="header">
       <Link className="logo-container" to="/">

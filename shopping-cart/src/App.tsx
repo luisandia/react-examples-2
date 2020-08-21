@@ -7,14 +7,21 @@ import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import SignInAndSignUpPage from './pages/SignInAndSignUpPage'
 import { createUserProfileDocument } from './firebase/firebase.utils'
+import { useDispatch } from 'react-redux'
+import { setCurrentUser } from './redux/User/UserAction'
 
-function App() {
-  const { currentUser } = useAuth()
+const App = () => {
+  const user = useAuth()
+  const dispatch = useDispatch()
 
-  createUserProfileDocument(currentUser, '')
+  React.useEffect(() => {
+    createUserProfileDocument(user.currentUser, '')
+    dispatch(setCurrentUser(user))
+  }, [dispatch, user])
+
   return (
     <div>
-      <Header user={currentUser} />
+      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
