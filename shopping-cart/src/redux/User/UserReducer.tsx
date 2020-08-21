@@ -1,11 +1,12 @@
 import { Action } from 'redux'
 import { currentUser } from '../../components/SignIn/useAuth'
+import { userActionTypes } from './userTypes'
 
 const INITIAL_STATE: currentUser = {
   currentUser: null,
 }
 
-export const SET_CURRENT_USER = 'SET_CURRENT_USER'
+const { SET_CURRENT_USER } = userActionTypes
 
 export interface setCurrentUserAction extends Action<typeof SET_CURRENT_USER> {
   payload: currentUser

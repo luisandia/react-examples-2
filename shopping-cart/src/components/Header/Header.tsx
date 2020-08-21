@@ -1,16 +1,25 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, TypedUseSelectorHook } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 import { auth } from '../../firebase/firebase.utils'
 import { RootState } from '../../redux/RootReducer'
 import './header.styles.scss'
+import CardIcon from '../CardIcon'
+import CartDropDown from '../CartDropDown'
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
-  const user = useSelector<RootState>((state) => state.user.currentUser)
-  console.log('my yuser ', user)
+  const {
+    user: { currentUser: user },
+    cart: { hidden },
+  } = useSelector<RootState, Pick<RootState, 'cart' | 'user'>>((state) => ({
+    user: state.user,
+    cart: state.cart,
+  }))
+  console.log(user)
+
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -33,7 +42,9 @@ const Header: React.FC<Props> = () => {
             SIGN IN
           </Link>
         )}
+        <CardIcon />
       </div>
+      {!hidden && <CartDropDown />}
     </div>
   )
 }

@@ -1,14 +1,14 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import { useAuth } from './components/SignIn/useAuth'
+import { createUserProfileDocument } from './firebase/firebase.utils'
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import SignInAndSignUpPage from './pages/SignInAndSignUpPage'
-import { createUserProfileDocument } from './firebase/firebase.utils'
-import { useDispatch } from 'react-redux'
-import { setCurrentUser } from './redux/User/UserAction'
+import { setCurrentUser } from './redux/User/userAction'
 
 const App = () => {
   const user = useAuth()
@@ -25,7 +25,12 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
-        <Route path="/signin" component={SignInAndSignUpPage} />
+        <Route
+          path="/signin"
+          render={() =>
+            user.currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+          }
+        />
       </Switch>
     </div>
   )
