@@ -18,8 +18,6 @@ const Header: React.FC<Props> = () => {
     user: state.user,
     cart: state.cart,
   }))
-  console.log(user)
-
   return (
     <div className="header">
       <Link className="logo-container" to="/">
