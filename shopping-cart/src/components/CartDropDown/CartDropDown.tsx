@@ -4,13 +4,11 @@ import CustomButtom from '../CustomButtom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/RootReducer'
 import CartItem from '../CardItem'
+import { selectCartItems } from '../../redux/Cart/cartSelector'
+import { Item } from '../CollectionItem/CollectionItem'
 
 const CartDropDown: React.FunctionComponent = () => {
-  const {
-    cart: { cartItems },
-  } = useSelector<RootState, Pick<RootState, 'cart'>>((state) => ({
-    cart: state.cart,
-  }))
+  const cartItems = useSelector<RootState, Item[]>(selectCartItems)
 
   return (
     <div className="cart-dropdown">
