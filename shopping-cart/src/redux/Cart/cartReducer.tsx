@@ -1,7 +1,7 @@
 import { cartActionTypes } from './cartTypes'
 import { Action } from 'redux'
 import { Item } from 'src/components/CollectionItem/CollectionItem'
-import { addItemTocart } from './cartUtil'
+import { addItemTocart, removeItemFromcart } from './cartUtil'
 
 interface cartType {
   hidden: boolean
@@ -29,6 +29,18 @@ export default (
       return {
         ...state,
         cartItems: addItemTocart(state.cartItems, action.payload),
+      }
+    case cartActionTypes.CLEAR_ITEM_FROM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(
+          (item) => item.id !== action.payload.id,
+        ),
+      }
+    case cartActionTypes.REMOVE_ITEM:
+      return {
+        ...state,
+        cartItems: removeItemFromcart(state.cartItems, action.payload),
       }
     default:
       return state
