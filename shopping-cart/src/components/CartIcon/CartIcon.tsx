@@ -7,7 +7,7 @@ import './cart-icon.styles.scss'
 
 interface Props {}
 
-const CardIcon: React.FC<Props> = () => {
+const CartIcon: React.FC<Props> = () => {
   const dispatch = useDispatch()
   const accumulatedQuantity = useSelector(selectCartItemsCount)
 
@@ -19,4 +19,4 @@ const CardIcon: React.FC<Props> = () => {
   )
 }
 
-export default CardIcon
+export default CartIcon

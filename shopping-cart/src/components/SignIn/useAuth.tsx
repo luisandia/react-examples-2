@@ -10,9 +10,13 @@ interface userProps {
   displayName: string
   email: string
 }
+export interface CurrentUser extends userProps {
+  id: string
+}
+export type InternalUser = CurrentUser | null
 
-export interface currentUser {
-  currentUser: (userProps & { id: string }) | null
+export type currentUser = {
+  currentUser: InternalUser
 }
 export const useAuth = () => {
   const [state, setState] = React.useState<currentUser>({

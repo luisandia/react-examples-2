@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import SignInAndSignUpPage from './pages/SignInAndSignUpPage'
 import { setCurrentUser } from './redux/User/userAction'
+import CheckoutPage from './pages/CheckoutPage'
 
 const App = () => {
   const user = useAuth()
@@ -25,6 +26,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
         <Route
           path="/signin"
           render={() =>

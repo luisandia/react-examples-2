@@ -18,7 +18,7 @@ export const SignIn = (props: Props) => {
 
     const { email, password } = state
     try {
-      const user = await auth.signInWithEmailAndPassword(email, password)
+      await auth.signInWithEmailAndPassword(email, password)
     } catch (error) {
       console.error(error)
     }
