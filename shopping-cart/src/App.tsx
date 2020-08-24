@@ -8,7 +8,7 @@ import { createUserProfileDocument } from './firebase/firebase.utils'
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import SignInAndSignUpPage from './pages/SignInAndSignUpPage'
-import { setCurrentUser } from './redux/User/userAction'
+import { setCurrentUser } from './redux/User/userSlice'
 import CheckoutPage from './pages/CheckoutPage'
 
 const App = () => {

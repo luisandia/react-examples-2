@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ReactComponent as ShoppingIcon } from 'src/assets/shopping-bag.svg'
-import { toggleCartHidden } from 'src/redux/Cart/cartAction'
 import { selectCartItemsCount } from 'src/redux/Cart/cartSelector'
 import './cart-icon.styles.scss'
+import { toggleCartHidden } from 'src/redux/Cart/cartSlice'
 
 interface Props {}
 

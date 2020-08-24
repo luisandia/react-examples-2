@@ -6,7 +6,7 @@ import {
   clearItemFromCart,
   addItem,
   removeItem,
-} from '../../redux/Cart/cartAction'
+} from 'src/redux/Cart/cartSlice'
 
 interface Props {
   item: Item

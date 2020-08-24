@@ -1,20 +1,21 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux'
-import userReducer from './User/userReducer'
-import logger from 'redux-logger'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import cartReducer from './Cart/cartReducer'
+import { cartSlice } from './Cart/cartSlice'
+import { logger } from 'redux-logger'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { userSlice } from './User/userSlice'
 
-const rootReducer = combineReducers({
-  user: userReducer,
-  cart: cartReducer,
-})
+const reducer = {
+  user: userSlice.reducer,
+  cart: cartSlice.reducer,
+}
 
-export type RootState = ReturnType<typeof rootReducer>
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: false,
+  }),
+  logger,
+]
+const store = configureStore({ reducer, middleware, devTools: true })
 
-const middlewares = [logger]
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(...middlewares)),
-)
+export type RootState = ReturnType<typeof store.getState>
 
 export default store

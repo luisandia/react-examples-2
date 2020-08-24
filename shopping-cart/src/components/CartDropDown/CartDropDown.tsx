@@ -7,7 +7,7 @@ import CartItem from '../CardItem'
 import { selectCartItems } from '../../redux/Cart/cartSelector'
 import { Item } from '../CollectionItem/CollectionItem'
 import { useHistory } from 'react-router-dom'
-import { toggleCartHidden } from '../../redux/Cart/cartAction'
+import { toggleCartHidden } from '../../redux/Cart/cartSlice'
 
 const CartDropDown: React.FunctionComponent = () => {
   const cartItems = useSelector<RootState, Item[]>(selectCartItems)
