@@ -1,6 +1,6 @@
-import * as React from "react";
-import "./menu-item.styles.scss";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import * as React from 'react'
+import './menu-item.styles.scss'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 
 // export interface RouteComponentProps<P> {
 //   match: match<P>;
@@ -16,16 +16,20 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 //   url: string;
 // }
 
-interface DirectoryProps {
-  title: string;
-  imageUrl: string;
-  size?: string;
-  linkUrl: string;
+export interface DirectoryProps {
+  title: string
+  imageUrl: string
+  size?: string
+  linkUrl: string
+}
+
+export interface DirectoryData extends DirectoryProps {
+  id: number
 }
 
 type Props = DirectoryProps &
   RouteComponentProps &
-  Pick<RouteComponentProps<{}>, "history" | "match">;
+  Pick<RouteComponentProps<{}>, 'history' | 'match'>
 
 const MenuItem: React.FC<Props> = ({
   title,
@@ -51,7 +55,7 @@ const MenuItem: React.FC<Props> = ({
         <span className="subtitle">SHOP NOW</span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default withRouter(MenuItem);
+export default withRouter(MenuItem)

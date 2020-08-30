@@ -8,6 +8,7 @@ import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { cartSlice } from './Cart/cartSlice'
 import { userSlice } from './User/userSlice'
+import { directorySlice } from './Directory/directorySlice'
 
 const persistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ const persistConfig = {
 const reducer = {
   user: userSlice.reducer,
   cart: cartSlice.reducer,
+  directory: directorySlice.reducer,
 }
 
 export const persistorReducer = persistReducer(
