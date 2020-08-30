@@ -1,9 +1,11 @@
-import React from "react";
-import { Item, CollectionItem } from "../CollectionItem/CollectionItem";
+import React from 'react'
+import CollectionItem from '../CollectionItem'
+import { Item } from '../CollectionItem/CollectionItem'
+import './collection-preview.styles.scss'
 
 interface Props {
-  title: string;
-  items: Item[];
+  title: string
+  items: Item[]
 }
 
 export const PreviewCollection: React.FC<Props> = ({ title, items }) => {
@@ -18,5 +20,5 @@ export const PreviewCollection: React.FC<Props> = ({ title, items }) => {
           ))}
       </div>
     </div>
-  );
-};
+  )
+}
