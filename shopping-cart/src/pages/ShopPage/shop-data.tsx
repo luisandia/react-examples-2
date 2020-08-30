@@ -1,4 +1,13 @@
-export const SHOP_DATA = [
+import { Item } from '../../components/CollectionItem/CollectionItem'
+
+export interface ShopData {
+  id: number
+  title: string
+  routeName: string
+  items: Item[]
+}
+
+export const SHOP_DATA: ShopData[] = [
   {
     id: 1,
     title: 'Hats',

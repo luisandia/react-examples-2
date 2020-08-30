@@ -9,6 +9,7 @@ import storage from 'redux-persist/lib/storage'
 import { cartSlice } from './Cart/cartSlice'
 import { userSlice } from './User/userSlice'
 import { directorySlice } from './Directory/directorySlice'
+import { shopSlice } from './Shop/shopSlice'
 
 const persistConfig = {
   key: 'root',
@@ -21,6 +22,7 @@ const reducer = {
   user: userSlice.reducer,
   cart: cartSlice.reducer,
   directory: directorySlice.reducer,
+  shop: shopSlice.reducer,
 }
 
 export const persistorReducer = persistReducer(
