@@ -1,20 +1,20 @@
 import React from 'react'
-import './collections-overview.styles.scss'
-import { createStructuredSelector } from 'reselect'
 import { useSelector } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { ShopDetail } from '../../pages/ShopPage/shop-data'
 import { RootState } from '../../redux/RootReducer'
-import { ShopData } from '../../pages/ShopPage/shop-data'
-import { SelectshopList } from '../../redux/Shop/shopSelector'
+import { selectShopForOverView } from '../../redux/Shop/shopSelector'
 import { PreviewCollection } from '../PreviewCollection/PreviewCollection'
+import './collections-overview.styles.scss'
 
 interface Props {}
 
 interface Result {
-  collections: ShopData[]
+  collections: ShopDetail[]
 }
 
 const structuredSelector = createStructuredSelector<RootState, Result>({
-  collections: SelectshopList,
+  collections: selectShopForOverView,
 })
 
 const CollectionsOverView = () => {

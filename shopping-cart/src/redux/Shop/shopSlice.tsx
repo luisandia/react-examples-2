@@ -1,7 +1,7 @@
 import { CaseReducer, createSlice } from '@reduxjs/toolkit'
 import SHOP_DATA, { ShopData } from '../../pages/ShopPage/shop-data'
 
-const initialState: ShopData[] = SHOP_DATA
+const initialState: ShopData = SHOP_DATA
 
 type State = typeof initialState
 

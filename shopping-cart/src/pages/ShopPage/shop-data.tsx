@@ -1,14 +1,18 @@
 import { Item } from '../../components/CollectionItem/CollectionItem'
 
-export interface ShopData {
+export interface ShopDetail {
   id: number
   title: string
   routeName: string
   items: Item[]
 }
 
-export const SHOP_DATA: ShopData[] = [
-  {
+export interface ShopData {
+  [key: string]: ShopDetail
+}
+
+export const SHOP_DATA: ShopData = {
+  hats: {
     id: 1,
     title: 'Hats',
     routeName: 'hats',
@@ -78,7 +82,7 @@ export const SHOP_DATA: ShopData[] = [
       },
     ],
   },
-  {
+  sneakers: {
     id: 2,
     title: 'Sneakers',
     routeName: 'sneakers',
@@ -141,7 +145,7 @@ export const SHOP_DATA: ShopData[] = [
       },
     ],
   },
-  {
+  jackets: {
     id: 3,
     title: 'Jackets',
     routeName: 'jackets',
@@ -183,7 +187,7 @@ export const SHOP_DATA: ShopData[] = [
       },
     ],
   },
-  {
+  womens: {
     id: 4,
     title: 'Womens',
     routeName: 'womens',
@@ -239,7 +243,7 @@ export const SHOP_DATA: ShopData[] = [
       },
     ],
   },
-  {
+  mens: {
     id: 5,
     title: 'Mens',
     routeName: 'mens',
@@ -288,6 +292,6 @@ export const SHOP_DATA: ShopData[] = [
       },
     ],
   },
-]
+}
 
 export default SHOP_DATA
