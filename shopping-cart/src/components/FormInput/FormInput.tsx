@@ -1,13 +1,10 @@
-import React from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import './form-input.styles.scss'
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  name: string
-  type: string
   value: string
-  required?: boolean
 }
 
 export const FormInput: React.FC<Props> = ({

@@ -72,6 +72,9 @@ const SignUp: React.FC<Props> = () => {
           onChange={handleChange}
           label="Email"
           required
+          autoComplete={"off"}
+          autoCorrect="off"
+          spellCheck="false"
         />
         <FormInput
           type="password"
@@ -80,6 +83,9 @@ const SignUp: React.FC<Props> = () => {
           onChange={handleChange}
           label="Password"
           required
+          autoComplete={"off"}
+          autoCorrect="off"
+          spellCheck="false"
         />
         <FormInput
           type="password"

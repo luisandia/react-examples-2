@@ -44,6 +44,9 @@ export const SignIn = (props: Props) => {
           value={state.email}
           label="email"
           required
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck="false"
         />
         <FormInput
           name="password"
@@ -52,6 +55,9 @@ export const SignIn = (props: Props) => {
           onChange={handleChange}
           label="password"
           required
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck="false"
         />
         <div className="buttons">
           <CustomButton type="submit"> Sign in </CustomButton>
