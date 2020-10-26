@@ -18,7 +18,7 @@ interface Props {
 
 export const CollectionItem: React.FC<Props> = ({ item }) => {
   const dispatch = useDispatch()
-  const { id, name, imageUrl, price } = item
+  const { name, imageUrl, price } = item
   return (
     <div className="collection-item">
       <div

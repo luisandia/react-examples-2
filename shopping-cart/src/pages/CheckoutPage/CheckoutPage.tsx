@@ -6,6 +6,7 @@ import { Item } from '../../components/CollectionItem/CollectionItem'
 import { selectCartItems, selectCartTotal } from '../../redux/Cart/cartSelector'
 import { createStructuredSelector } from 'reselect'
 import CheckoutItem from '../../components/CheckoutItem/CheckoutItem'
+import StripeButton from 'src/components/stripeButton'
 
 interface Props {}
 
@@ -39,12 +40,17 @@ const CheckoutPage = (props: Props) => {
           <span>Price</span>
         </div>
       </div>
-
       {cartItems.map((item) => (
         <CheckoutItem key={item.id} item={item} />
       ))}
       <div className="total">
         <span>TOTAL: ${total}</span>
+      </div>
+      <StripeButton price={total} />
+      <div className="test-warning">
+        *Please use the following test credit card for payments*
+        <br />
+        4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
       </div>
     </div>
   )
