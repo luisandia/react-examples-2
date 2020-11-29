@@ -1,7 +1,9 @@
 import {
+  Action,
   combineReducers,
   configureStore,
   getDefaultMiddleware,
+  ThunkAction,
 } from '@reduxjs/toolkit'
 import { logger } from 'redux-logger'
 import { persistReducer, persistStore } from 'redux-persist'
@@ -46,5 +48,7 @@ const store = configureStore({
 export const persistorStore = persistStore(store)
 
 export type RootState = ReturnType<typeof store.getState>
+
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>
 
 export default store
