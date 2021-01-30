@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import CardList from "./components/CardList";
 import "./App.css";
 import SearchBox from "./components/SearchBox/SearchBox";
+import connectSqlite3 from "connect-sqlite3";
+
 interface Props {}
 
 export interface Monster {
