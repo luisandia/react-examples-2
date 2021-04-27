@@ -1,22 +1,36 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import Login from './Login';
 
 const ROUTES = [
-  { path: '/', key: 'ROOT', exact: true, component: () => <h1>Log in</h1> },
+  { path: "/", key: "ROOT", exact: true, component: Login },
   {
-    path: '/app',
-    key: 'APP',
-    component: RenderRoutes,
+    path:"/app/public",
+    key:"APP_PUBLIC",
+    exact:true,
+    component: () => <h1>PUBLIC</h1>,
+  },
+  {
+    path: "/app",
+    key: "APP",
+    component: props => {
+      console.log(props)
+      if (!localStorage.getItem("user")) {
+        alert("You need to log in to access app routes");
+        return <Redirect to={"/"} />;
+      }
+      return <RenderRoutes {...props} />;
+    },
     routes: [
       {
-        path: '/app',
-        key: 'APP_ROOT',
+        path: "/app",
+        key: "APP_ROOT",
         exact: true,
         component: () => <h1>App Index</h1>,
       },
       {
-        path: '/app/page',
-        key: 'APP_PAGE',
+        path: "/app/page",
+        key: "APP_PAGE",
         exact: true,
         component: () => <h1>App Page</h1>,
       },
