@@ -1,7 +1,16 @@
-import { AppBar, Button, Toolbar, useScrollTrigger, Theme } from '@material-ui/core';
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  useScrollTrigger,
+  Theme,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
-import {ITheme } from '../ui/Theme';
+import { ITheme } from './Theme';
+import logo from "src/assets/logo.svg";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 function ElevationScroll(props: any) {
   const { children } = props;
@@ -106,22 +115,26 @@ const useStyles = makeStyles((theme: ITheme) => ({
 interface Props {}
 
 const Header = (props: Props) => {
+  const classes = useStyles();
   return (
-    <ElevationScroll>
-      <AppBar position="fixed">
-        <Toolbar disableGutters>
-          <Button
-            // component={Link}
-            // to="/"
-            disableRipple
-            // onClick={() => props.setValue(0)}
-            // className={classes.logoContainer}
-          >
-            {/* <img alt="company logo" className={classes.logo} src={logo} /> */}
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </ElevationScroll>
+    <>
+      <ElevationScroll>
+      <AppBar position="fixed" className={classes.appbar}>
+          <Toolbar disableGutters>
+            <Button
+              // component={Link}
+              // to="/"
+              disableRipple
+              // onClick={() => props.setValue(0)}
+              className={classes.logoContainer}
+            >
+              <img alt="company logo" className={classes.logo} src={logo} />
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+      <div className={classes.toolbarMargin} />
+    </>
   );
 };
 
