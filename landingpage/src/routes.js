@@ -1,40 +1,30 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { ABOUT, CONTACT, HOME, REVOLUTION, SERVICES } from './constants';
+
 
 const ROUTES = [
-  { path: "/", key: "Home", exact: true, component: ()=><div>Home</div> },
-  // {
-  //   path:"/app/public",
-  //   key:"APP_PUBLIC",
-  //   exact:true,
-  //   component: () => <h1>PUBLIC</h1>,
-  // },
-  // {
-  //   path: "/app",
-  //   key: "APP",
-  //   component: props => {
-  //     console.log(props)
-  //     if (!localStorage.getItem("user")) {
-  //       alert("You need to log in to access app routes");
-  //       return <Redirect to={"/"} />;
-  //     }
-  //     return <RenderRoutes {...props} />;
-  //   },
-  //   routes: [
-  //     {
-  //       path: "/app",
-  //       key: "APP_ROOT",
-  //       exact: true,
-  //       component: () => <h1>App Index</h1>,
-  //     },
-  //     {
-  //       path: "/app/page",
-  //       key: "APP_PAGE",
-  //       exact: true,
-  //       component: () => <h1>App Page</h1>,
-  //     },
-  //   ],
-  // },
+  { ...HOME, exact: true, component: ()=><div>Home</div> },
+  {
+    ...SERVICES,
+    exact:true,
+    component: () => <h1>Services</h1>,
+  },
+  {
+   ...REVOLUTION,
+    exact:true,
+    component: () => <h1>Revolution</h1>,
+  },
+  {
+    ...ABOUT,
+    exact:true,
+    component: () => <h1>About us</h1>,
+  },
+  {
+    ...CONTACT,
+    exact:true,
+    component: () => <h1>Contact Us</h1>,
+  },
 ];
 
 export default ROUTES;

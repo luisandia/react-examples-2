@@ -1,5 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles';
 import { Theme, ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
+
 import {
   ColorPartial,
   CommonColors,
