@@ -6,8 +6,8 @@ import Header from './ui/Header';
 import theme from './ui/Theme';
 
 function App() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [value, setValue] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [value, setValue] = useState<number>(0);
 
   return (
     <ThemeProvider theme={theme}>

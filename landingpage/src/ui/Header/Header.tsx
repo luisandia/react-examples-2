@@ -9,14 +9,13 @@ import {
   MenuItem,
   SwipeableDrawer,
   Toolbar,
-  useMediaQuery,
-  useScrollTrigger
+  useMediaQuery
 } from '@material-ui/core';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles, useTheme } from '@material-ui/styles';
-import React, { useEffect, useRef, useState } from 'react';
+import { useTheme } from '@material-ui/styles';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from 'src/assets/logo.svg';
 import {
@@ -29,112 +28,19 @@ import {
   SERVICES,
   WEBSITE_DEVELOPMENT
 } from 'src/constants';
-import { ITheme } from './Theme';
+import { ITheme } from '../Theme';
+import { ElevationScroll } from './ElevationScroll';
+import headerStyles from './styles';
 
-function ElevationScroll(props: any) {
-  const { children } = props;
-
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-  });
-
-  return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0,
-  });
+interface Props {
+  value: number;
+  setValue: Dispatch<SetStateAction<number>>;
+  selectedIndex: number;
+  setSelectedIndex: Dispatch<SetStateAction<number>>;
 }
 
-const useStyles = makeStyles((theme: ITheme) => ({
-  toolbarMargin: {
-    ...theme.mixins.toolbar,
-    marginBottom: '3em',
-    [theme.breakpoints.down('md')]: {
-      marginBottom: '2em',
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: '1.25em',
-    },
-  },
-  logo: {
-    height: '8em',
-    [theme.breakpoints.down('md')]: {
-      height: '7em',
-    },
-    [theme.breakpoints.down('xs')]: {
-      height: '5.5em',
-    },
-  },
-  logoContainer: {
-    padding: 0,
-    '&:hover': {
-      backgroundColor: 'transparent',
-    },
-  },
-  tabContainer: {
-    marginLeft: 'auto',
-  },
-  tab: {
-    ...theme.typography.tab,
-    minWidth: 10,
-    marginLeft: '25px',
-  },
-  button: {
-    ...theme.typography.estimate,
-    borderRadius: '50px',
-    marginLeft: '50px',
-    marginRight: '25px',
-    height: '45px',
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.light,
-    },
-  },
-  menu: {
-    backgroundColor: theme.palette.common.blue,
-    color: 'white',
-    borderRadius: '0px',
-  },
-  menuItem: {
-    ...theme.typography.tab,
-    opacity: 0.7,
-    '&:hover': {
-      opacity: 1,
-    },
-  },
-  drawerIcon: {
-    height: '50px',
-    width: '50px',
-  },
-  drawerIconContainer: {
-    marginLeft: 'auto',
-    '&:hover': {
-      backgroundColor: 'transparent',
-    },
-  },
-  drawer: {
-    backgroundColor: theme.palette.common.blue,
-  },
-  drawerItem: {
-    ...theme.typography.tab,
-    color: 'white',
-    opacity: 0.7,
-  },
-  drawerItemEstimate: {
-    backgroundColor: theme.palette.common.orange,
-  },
-  drawerItemSelected: {
-    '& .MuiListItemText-root': {
-      opacity: 1,
-    },
-  },
-  appbar: {
-    zIndex: theme.zIndex.modal + 1,
-  },
-}));
-
-interface Props {}
-
-const Header = (props: any) => {
-  const classes = useStyles();
+const Header = (props: Props) => {
+  const classes = headerStyles();
   const theme = useTheme<ITheme>();
   console.log('theme ', theme);
   const iOS =
@@ -144,7 +50,7 @@ const Header = (props: any) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
 
-  const handleChange = (e: any, newValue: any) => {
+  const handleChange = (e: React.ChangeEvent<{}>, newValue: any) => {
     props.setValue(newValue);
   };
 
@@ -153,13 +59,16 @@ const Header = (props: any) => {
     setOpenMenu(true);
   };
 
-  const handleMenuItemClick = (e: any, i: any) => {
+  const handleMenuItemClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    i: number,
+  ) => {
     setAnchorEl(null);
     setOpenMenu(false);
     props.setSelectedIndex(i);
   };
 
-  const handleClose = (e: any) => {
+  const handleClose = () => {
     setAnchorEl(null);
     setOpenMenu(false);
   };
@@ -236,8 +145,9 @@ const Header = (props: any) => {
     setValue,
     value,
   ]);
+
   const tabs = (
-    <React.Fragment>
+    <>
       <Tabs
         value={props.value}
         onChange={handleChange}
@@ -280,16 +190,18 @@ const Header = (props: any) => {
         style={{ zIndex: 1302 }}
         keepMounted
       >
-        {menuOptions.map((option: any, i: any) => (
+        {menuOptions.map((option: any, i) => (
           <MenuItem
             key={`${option}${i}`}
             component={Link}
             to={option.path}
             classes={{ root: classes.menuItem }}
-            onClick={(event: any) => {
+            onClick={(
+              event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+            ) => {
               handleMenuItemClick(event, i);
               props.setValue(1);
-              handleClose(event);
+              handleClose();
             }}
             selected={i === props.selectedIndex && props.value === 1}
           >
@@ -297,11 +209,11 @@ const Header = (props: any) => {
           </MenuItem>
         ))}
       </Menu>
-    </React.Fragment>
+    </>
   );
 
   const drawer = (
-    <React.Fragment>
+    <>
       <SwipeableDrawer
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
@@ -362,7 +274,7 @@ const Header = (props: any) => {
       >
         <MenuIcon className={classes.drawerIcon} />
       </IconButton>
-    </React.Fragment>
+    </>
   );
   return (
     <>
@@ -373,7 +285,7 @@ const Header = (props: any) => {
               component={Link}
               to="/"
               disableRipple
-              // onClick={() => props.setValue(0)}
+              onClick={() => props.setValue(0)}
               className={classes.logoContainer}
             >
               <img

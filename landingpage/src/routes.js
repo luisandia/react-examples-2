@@ -1,28 +1,27 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ABOUT, CONTACT, HOME, REVOLUTION, SERVICES } from './constants';
 
-
 const ROUTES = [
-  { ...HOME, exact: true, component: ()=><div>Home</div> },
+  { ...HOME, exact: true, component: () => <div>Home</div> },
   {
     ...SERVICES,
-    exact:true,
+    exact: true,
     component: () => <h1>Services</h1>,
   },
   {
-   ...REVOLUTION,
-    exact:true,
+    ...REVOLUTION,
+    exact: true,
     component: () => <h1>Revolution</h1>,
   },
   {
     ...ABOUT,
-    exact:true,
+    exact: true,
     component: () => <h1>About us</h1>,
   },
   {
     ...CONTACT,
-    exact:true,
+    exact: true,
     component: () => <h1>Contact Us</h1>,
   },
 ];
@@ -38,7 +37,9 @@ function RouteWithSubRoutes(route) {
     <Route
       path={route.path}
       exact={route.exact}
-      render={(props) => <route.component {...props} routes={route.routes} />}
+      render={(props) => (
+        <route.component {...props} routes={route.routes} />
+      )}
     />
   );
 }
