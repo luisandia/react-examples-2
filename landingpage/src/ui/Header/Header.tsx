@@ -9,13 +9,20 @@ import {
   MenuItem,
   SwipeableDrawer,
   Toolbar,
-  useMediaQuery
+  useMediaQuery,
 } from '@material-ui/core';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useTheme } from '@material-ui/styles';
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { nanoid } from 'nanoid';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Link } from 'react-router-dom';
 import logo from 'src/assets/logo.svg';
 import {
@@ -26,7 +33,7 @@ import {
   MOBILE_APPS,
   REVOLUTION,
   SERVICES,
-  WEBSITE_DEVELOPMENT
+  WEBSITE_DEVELOPMENT,
 } from 'src/constants';
 import { ITheme } from '../Theme';
 import { ElevationScroll } from './ElevationScroll';
@@ -42,16 +49,16 @@ interface Props {
 const Header = (props: Props) => {
   const classes = headerStyles();
   const theme = useTheme<ITheme>();
-  console.log('theme ', theme);
-  const iOS =
-    process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down('md'));
   const [openDrawer, setOpenDrawer] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
+  const { value, selectedIndex, setSelectedIndex, setValue } = props;
 
   const handleChange = (e: React.ChangeEvent<{}>, newValue: any) => {
-    props.setValue(newValue);
+    setValue(newValue);
   };
 
   const handleClick = (e: any) => {
@@ -65,7 +72,7 @@ const Header = (props: Props) => {
   ) => {
     setAnchorEl(null);
     setOpenMenu(false);
-    props.setSelectedIndex(i);
+    setSelectedIndex(i);
   };
 
   const handleClose = () => {
@@ -73,9 +80,7 @@ const Header = (props: Props) => {
     setOpenMenu(false);
   };
 
-  const {
-    current: { menuOptions, menu_links, setValue, setSelectedIndex },
-  } = useRef({
+  const propRefs = useRef({
     menuOptions: [
       {
         ...SERVICES,
@@ -111,21 +116,25 @@ const Header = (props: Props) => {
       { ...ABOUT, activeIndex: 3 },
       { ...CONTACT, activeIndex: 4 },
     ],
-    setValue: props.setValue,
-    setSelectedIndex: props.setSelectedIndex,
+    setValue,
+    setSelectedIndex,
   });
 
-  const { value, selectedIndex } = props;
+  const {
+    current: { menuOptions, menu_links },
+  } = propRefs;
+
   useEffect(() => {
+    const {
+      current: { setValue, setSelectedIndex, menuOptions, menu_links },
+    } = propRefs;
+
     [...menuOptions, ...menu_links].forEach((route: any) => {
       switch (window.location.pathname) {
         case `${route.path}`:
           if (value !== route.activeIndex) {
             setValue(route.activeIndex);
-            if (
-              route.selectedIndex &&
-              route.selectedIndex !== selectedIndex
-            ) {
+            if (route.selectedIndex && route.selectedIndex !== selectedIndex) {
               setSelectedIndex(route.selectedIndex);
             }
           }
@@ -137,26 +146,19 @@ const Header = (props: Props) => {
           break;
       }
     });
-  }, [
-    menuOptions,
-    menu_links,
-    selectedIndex,
-    setSelectedIndex,
-    setValue,
-    value,
-  ]);
+  }, [selectedIndex, value]);
 
   const tabs = (
     <>
       <Tabs
-        value={props.value}
+        value={value}
         onChange={handleChange}
         className={classes.tabContainer}
         indicatorColor="primary"
       >
-        {menu_links.map((route: any, index) => (
+        {menu_links.map((route: any, ) => (
           <Tab
-            key={`${route}${index}`}
+            key={nanoid()}
             className={classes.tab}
             component={Link}
             to={route.path}
@@ -173,7 +175,7 @@ const Header = (props: Props) => {
         variant="contained"
         color="secondary"
         className={classes.button}
-        onClick={() => props.setValue(5)}
+        onClick={() => setValue(5)}
       >
         Free Estimate
       </Button>
@@ -192,7 +194,7 @@ const Header = (props: Props) => {
       >
         {menuOptions.map((option: any, i) => (
           <MenuItem
-            key={`${option}${i}`}
+            key={nanoid()}
             component={Link}
             to={option.path}
             classes={{ root: classes.menuItem }}
@@ -200,10 +202,10 @@ const Header = (props: Props) => {
               event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
             ) => {
               handleMenuItemClick(event, i);
-              props.setValue(1);
+              setValue(1);
               handleClose();
             }}
-            selected={i === props.selectedIndex && props.value === 1}
+            selected={i === selectedIndex && value === 1}
           >
             {option.key}
           </MenuItem>
@@ -231,17 +233,14 @@ const Header = (props: Props) => {
               button
               component={Link}
               to={route.path}
-              selected={props.value === route.activeIndex}
+              selected={value === route.activeIndex}
               classes={{ selected: classes.drawerItemSelected }}
               onClick={() => {
                 setOpenDrawer(false);
-                props.setValue(route.activeIndex);
+                setValue(route.activeIndex);
               }}
             >
-              <ListItemText
-                className={classes.drawerItem}
-                disableTypography
-              >
+              <ListItemText className={classes.drawerItem} disableTypography>
                 {route.key}
               </ListItemText>
             </ListItem>
@@ -249,7 +248,7 @@ const Header = (props: Props) => {
           <ListItem
             onClick={() => {
               setOpenDrawer(false);
-              props.setValue(5);
+              setValue(5);
             }}
             divider
             button
@@ -259,7 +258,7 @@ const Header = (props: Props) => {
               selected: classes.drawerItemSelected,
             }}
             to="/estimate"
-            selected={props.value === 5}
+            selected={value === 5}
           >
             <ListItemText className={classes.drawerItem} disableTypography>
               Free Estimate
@@ -285,14 +284,10 @@ const Header = (props: Props) => {
               component={Link}
               to="/"
               disableRipple
-              onClick={() => props.setValue(0)}
+              onClick={() => setValue(0)}
               className={classes.logoContainer}
             >
-              <img
-                alt="company logo"
-                className={classes.logo}
-                src={logo}
-              />
+              <img alt="company logo" className={classes.logo} src={logo} />
             </Button>
             {matches ? drawer : tabs}
           </Toolbar>

@@ -33,12 +33,13 @@ export default ROUTES;
  * https://reacttraining.com/react-router/web/example/route-config
  */
 function RouteWithSubRoutes(route) {
+  const {path, exact, routes} = route;
   return (
     <Route
-      path={route.path}
-      exact={route.exact}
+      path={path}
+      exact={exact}
       render={(props) => (
-        <route.component {...props} routes={route.routes} />
+        <route.component {...props} routes={routes} />
       )}
     />
   );
@@ -50,9 +51,7 @@ function RouteWithSubRoutes(route) {
 export function RenderRoutes({ routes }) {
   return (
     <Switch>
-      {routes.map((route, i) => {
-        return <RouteWithSubRoutes key={route.key} {...route} />;
-      })}
+      {routes.map((route,) => <RouteWithSubRoutes key={route.key} {...route} />)}
       <Route component={() => <h1>Not Found!</h1>} />
     </Switch>
   );
