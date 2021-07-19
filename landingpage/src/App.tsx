@@ -19,7 +19,11 @@ function App() {
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
         />
-        <RenderRoutes routes={ROUTES} />
+        <RenderRoutes
+          routes={ROUTES}
+          setValue={setValue}
+          setSelectedIndex={setSelectedIndex}
+        />
         <Footer setValue={setValue} setSelectedIndex={setSelectedIndex} />
       </BrowserRouter>
     </ThemeProvider>
