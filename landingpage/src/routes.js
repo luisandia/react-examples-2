@@ -1,15 +1,28 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import CustomSoftwarePage from './components/CustomSoftwarePage';
 import LandingPage from './components/LandingPage';
 import ServicesPage from './components/ServicesPage';
-import { ABOUT, CONTACT, HOME, REVOLUTION, SERVICES } from './constants';
+import {
+  ABOUT,
+  CONTACT,
+  CUSTOM_SOFTWARE,
+  HOME,
+  REVOLUTION,
+  SERVICES,
+} from './constants';
 
 const ROUTES = [
   { ...HOME, exact: true, component: (props) => <LandingPage {...props} /> },
   {
     ...SERVICES,
     exact: true,
-    component: (props) => <ServicesPage {...props} /> ,
+    component: (props) => <ServicesPage {...props} />,
+  },
+  {
+    ...CUSTOM_SOFTWARE,
+    exact: true,
+    component: (props) => <CustomSoftwarePage {...props} />,
   },
   {
     ...REVOLUTION,
