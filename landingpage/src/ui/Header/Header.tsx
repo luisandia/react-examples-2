@@ -15,11 +15,11 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useTheme } from '@material-ui/styles';
-import { nanoid } from 'nanoid';
 import React, {
   Dispatch,
   SetStateAction,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -80,6 +80,23 @@ const Header = (props: Props) => {
     setOpenMenu(false);
   };
 
+  const menu_links = useMemo(
+    () => [
+      { ...HOME, activeIndex: 0 },
+      {
+        ...SERVICES,
+        activeIndex: 1,
+        ariaOwns: anchorEl ? 'simple-menu' : undefined,
+        ariaPopup: anchorEl ? 'true' : undefined,
+        mouseOver: (event: any) => handleClick(event),
+      },
+      { ...REVOLUTION, activeIndex: 2 },
+      { ...ABOUT, activeIndex: 3 },
+      { ...CONTACT, activeIndex: 4 },
+    ],
+    [anchorEl],
+  );
+
   const propRefs = useRef({
     menuOptions: [
       {
@@ -103,30 +120,17 @@ const Header = (props: Props) => {
         selectedIndex: 3,
       },
     ],
-    menu_links: [
-      { ...HOME, activeIndex: 0 },
-      {
-        ...SERVICES,
-        activeIndex: 1,
-        ariaOwns: anchorEl ? 'simple-menu' : undefined,
-        ariaPopup: anchorEl ? 'true' : undefined,
-        mouseOver: (event: any) => handleClick(event),
-      },
-      { ...REVOLUTION, activeIndex: 2 },
-      { ...ABOUT, activeIndex: 3 },
-      { ...CONTACT, activeIndex: 4 },
-    ],
     setValue,
     setSelectedIndex,
   });
 
   const {
-    current: { menuOptions, menu_links },
+    current: { menuOptions },
   } = propRefs;
 
   useEffect(() => {
     const {
-      current: { setValue, setSelectedIndex, menuOptions, menu_links },
+      current: { setValue, setSelectedIndex, menuOptions },
     } = propRefs;
 
     [...menuOptions, ...menu_links].forEach((route: any) => {
@@ -146,7 +150,7 @@ const Header = (props: Props) => {
           break;
       }
     });
-  }, [selectedIndex, value]);
+  }, [menu_links, selectedIndex, value]);
 
   const tabs = (
     <>
@@ -156,9 +160,9 @@ const Header = (props: Props) => {
         className={classes.tabContainer}
         indicatorColor="primary"
       >
-        {menu_links.map((route: any, ) => (
+        {menu_links.map((route: any) => (
           <Tab
-            key={nanoid()}
+            key={route.key}
             className={classes.tab}
             component={Link}
             to={route.path}
@@ -194,7 +198,7 @@ const Header = (props: Props) => {
       >
         {menuOptions.map((option: any, i) => (
           <MenuItem
-            key={nanoid()}
+            key={option.key}
             component={Link}
             to={option.path}
             classes={{ root: classes.menuItem }}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
+import ServicesPage from './components/ServicesPage';
 import { ABOUT, CONTACT, HOME, REVOLUTION, SERVICES } from './constants';
 
 const ROUTES = [
@@ -8,7 +9,7 @@ const ROUTES = [
   {
     ...SERVICES,
     exact: true,
-    component: () => <h1>Services</h1>,
+    component: (props) => <ServicesPage {...props} /> ,
   },
   {
     ...REVOLUTION,
